@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import { UserProvider } from "@/context/UserContext";
+import { FavoriteProvider } from "@/context/FavoriteContext";
 
 const fontSans = localFont({
   src: [
@@ -23,28 +24,18 @@ const fontSans = localFont({
 });
 
 export const metadata = {
-  title: "MyWebsite — Build something meaningful",
+  title: "Userly — User Directory & Favorites",
   description:
-    "We help individuals and businesses build modern, simple, and useful digital experiences.",
+    "Explore users and save your favorite profiles with Userly.",
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html
-      lang="en"
-      className={`dark ${fontSans.variable}`}
-    >
-      <body className="flex min-h-screen flex-col bg-background text-foreground antialiased">
-        <UserProvider>
-        <Navbar />
-
-        <main className="flex-1">
-          {children}
-        </main>
-
-        <Footer />
-        </UserProvider>;
-      </body>
-    </html>
+export default function RootLayout({ children }) { 
+  return ( <html lang="en" className={`dark ${fontSans.variable}`} > 
+  <body className="flex min-h-screen flex-col bg-background text-foreground antialiased"> 
+    <UserProvider> <FavoriteProvider> 
+      <Navbar /> <main className="flex-1"> {children} </main> 
+      <Footer /> </FavoriteProvider> </UserProvider> 
+      </body> 
+      </html>
   );
 }

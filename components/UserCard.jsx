@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 
 import {
@@ -7,7 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { useFavorites } from "@/context/FavoriteContext";
+
 export default function UserCard({ user }) {
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  const favorite = isFavorite(user.id);
+
   const initials = user.name
     .split(" ")
     .map((part) => part[0])
@@ -22,6 +30,7 @@ export default function UserCard({ user }) {
           <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/40 to-primary/10 text-sm font-semibold">
             {initials}
           </div>
+
           <CardTitle>{user.name}</CardTitle>
         </div>
       </CardHeader>
@@ -33,7 +42,19 @@ export default function UserCard({ user }) {
           {user.company.name}
         </p>
 
-        <Button className="mt-4 w-full rounded-full">View Profile</Button>
+        <div className="mt-4 flex gap-2">
+          <Button className="flex-1 rounded-full">
+            View Profile
+          </Button>
+
+          <Button
+            variant={favorite ? "default" : "outline"}
+            className="rounded-full"
+            onClick={() => toggleFavorite(user)}
+          >
+            {favorite ? "★ Favorited" : "☆ Favorite"}
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
