@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 
 import { UserProvider } from "@/context/UserContext";
 import { FavoriteProvider } from "@/context/FavoriteContext";
+import BackToTop from "@/components/BackToTop";
 
 const fontSans = localFont({
   src: [
@@ -30,11 +31,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) { 
-  return ( <html lang="en" className={`dark ${fontSans.variable}`} > 
+  return ( <html
+  lang="en"
+  className={fontSans.variable}
+  suppressHydrationWarning> 
   <body className="flex min-h-screen flex-col bg-background text-foreground antialiased"> 
     <UserProvider> <FavoriteProvider> 
       <Navbar /> <main className="flex-1"> {children} </main> 
-      <Footer /> </FavoriteProvider> </UserProvider> 
+      <BackToTop /> <Footer /> </FavoriteProvider> </UserProvider> 
       </body> 
       </html>
   );

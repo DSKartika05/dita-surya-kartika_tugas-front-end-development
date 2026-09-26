@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, UserPlus, MessageCircle } from "lucide-react";
 
 import { useUser } from "@/context/UserContext";
 
@@ -9,9 +9,21 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "hello@mywebsite.com" },
-  { icon: MapPin, label: "Location", value: "Jakarta, Indonesia" },
-  { icon: MessageCircle, label: "Response time", value: "Within 1-2 days" },
+  {
+    icon: UserPlus,
+    label: "Create your profile",
+    value: "Tell us your name",
+  },
+  {
+    icon: Mail,
+    label: "Your email",
+    value: "For your contact details",
+  },
+  {
+    icon: MessageCircle,
+    label: "Say hello",
+    value: "Leave a short message",
+  },
 ];
 
 export default function Contact() {
@@ -43,25 +55,32 @@ export default function Contact() {
       <div className="bg-grid bg-radial-fade absolute inset-0 -z-10" />
 
       <div className="mx-auto max-w-6xl px-6 py-20">
+
+        {/* Header */}
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold text-primary">Contact</p>
+          <p className="text-sm font-semibold text-primary">
+            Get Started
+          </p>
 
           <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
-            Let&apos;s talk
+            Welcome to Userly
           </h1>
 
           <p className="mt-4 text-muted-foreground">
-            Have a project or question in mind? Send us a message and
-            we&apos;ll get back to you.
+            Enter your details below to introduce yourself to Userly.
+            Your name will appear as a personalized greeting in the
+            navigation bar.
           </p>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-5">
+
+          {/* Information */}
           <div className="space-y-4 md:col-span-2">
             {contactInfo.map(({ icon: Icon, label, value }) => (
               <Card
                 key={label}
-                className="border border-white/10 bg-foreground/[0.03]"
+                className="border border-white/10 bg-foreground/[0.03] transition-all hover:border-primary/30"
               >
                 <CardContent className="flex items-center gap-4">
                   <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -82,17 +101,34 @@ export default function Contact() {
             ))}
           </div>
 
+          {/* Form */}
           <Card className="border border-white/10 bg-foreground/[0.03] md:col-span-3">
             <CardContent>
               {submitted ? (
-                <div className="flex h-full min-h-64 flex-col items-center justify-center text-center">
-                  <p className="text-lg font-semibold">
-                    Message sent
+                <div className="flex min-h-64 flex-col items-center justify-center text-center">
+
+                  <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <UserPlus className="size-5" />
+                  </div>
+
+                  <p className="mt-4 text-lg font-semibold">
+                    Welcome, {name}! 👋
                   </p>
 
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    Thanks for reaching out — we&apos;ll reply soon.
+                  <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+                    Your profile information has been saved for this
+                    session. You can now explore Userly and browse the
+                    user directory.
                   </p>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="mt-6 rounded-full"
+                    onClick={() => setSubmitted(false)}
+                  >
+                    Edit Information
+                  </Button>
                 </div>
               ) : (
                 <form
@@ -100,6 +136,8 @@ export default function Contact() {
                   className="space-y-4"
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
+
+                    {/* Name */}
                     <div className="space-y-1.5">
                       <label
                         htmlFor="name"
@@ -119,6 +157,7 @@ export default function Contact() {
                       />
                     </div>
 
+                    {/* Email */}
                     <div className="space-y-1.5">
                       <label
                         htmlFor="email"
@@ -140,6 +179,7 @@ export default function Contact() {
                     </div>
                   </div>
 
+                  {/* Message */}
                   <div className="space-y-1.5">
                     <label
                       htmlFor="message"
@@ -152,7 +192,7 @@ export default function Contact() {
                       id="message"
                       rows={5}
                       required
-                      placeholder="Tell us about your project..."
+                      placeholder="Say hello to Userly..."
                       value={message}
                       onChange={(event) =>
                         setMessage(event.target.value)
@@ -165,16 +205,10 @@ export default function Contact() {
                     type="submit"
                     className="w-full rounded-full"
                   >
-                    Send message
+                    Get Started
                   </Button>
                 </form>
               )}
-
-              <div className="mt-6 rounded-lg bg-muted p-4">
-                <p>Name: {name}</p>
-                <p>Email: {email}</p>
-                <p>Message: {message}</p>
-              </div>
             </CardContent>
           </Card>
         </div>

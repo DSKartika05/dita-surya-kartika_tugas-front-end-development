@@ -4,16 +4,18 @@ const columns = [
   {
     title: "Menu",
     links: [
-      { href: "/", label: "Beranda" },
-      { href: "/about", label: "Tentang" },
-      { href: "/services", label: "Layanan" },
+      { href: "/", label: "Home" },
+      { href: "/about", label: "About" },
+      { href: "/services", label: "Services" },
+      { href: "/profile", label: "Profile" },
     ],
   },
   {
-    title: "Telusuri",
+    title: "Explore",
     links: [
-      { href: "/profile", label: "Profil" },
-      { href: "/contact", label: "Bantuan" },
+      { href: "/users", label: "Users" },
+      { href: "/favorites", label: "Favorites" },
+      { href: "/contact", label: "Contact" },
     ],
   },
 ];
@@ -25,19 +27,31 @@ export default function Footer() {
 
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
+
+          {/* Brand */}
           <div className="max-w-xs">
-            <p className="text-lg font-bold"><b>PANGANITA: Pangan dan Gizi <br/>untuk Keluarga</b></p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Dibuat dan dikembangkan oleh Kel. Malahayati <br />untuk Perempuan Inovasi 2026
-              <br />
-              <br /><b>Nama Anggota: DITA SURYA KARTIKA</b>
+            <p className="text-lg font-bold tracking-[0.08em] text-primary">
+              USERLY
+            </p>
+
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              User Directory &amp; Favorites — a Front-End Development
+              assignment created for the <b>Perempuan Inovasi 2026</b> program.
+            </p>
+
+            <p className="mt-4 text-xs text-muted-foreground">
+              Developed by{" "}
+              <span className="font-medium text-foreground">
+                Dita Surya Kartika
+              </span>
             </p>
           </div>
 
+          {/* Navigation */}
           <div className="grid grid-cols-2 gap-10 sm:flex sm:gap-16">
             {columns.map((column) => (
               <div key={column.title}>
-                <p className="text-xs font-semibold tracking-wide text-foreground/80 uppercase">
+                <p className="text-xs font-semibold uppercase tracking-wide text-foreground/80">
                   {column.title}
                 </p>
 
@@ -46,7 +60,7 @@ export default function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        className="text-sm text-muted-foreground transition-colors hover:text-primary"
                       >
                         {link.label}
                       </Link>
@@ -58,9 +72,13 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Bottom */}
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 PANGANITA. Hak Cipta Dilindungi.</p>
-          <p>Dibuat dengan Next.js &amp; Tailwind CSS.</p>
+          <p>© 2026 Userly. All rights reserved.</p>
+
+          <p>
+            Built with Next.js &amp; Tailwind CSS.
+          </p>
         </div>
       </div>
     </footer>
